@@ -1,0 +1,59 @@
+/* Decolonisation Development - Color Variables */
+:root {
+    /* Primary Colors - African vibrant palette */
+    --primary-gold: #9A7A48; /* muted warm gold */
+    --primary-red: #7F5149; /* desaturated brick */
+    --primary-green: #436b43; /* softer green */
+    --primary-purple: #5b435b; /* muted plum */
+    --primary-orange: #a86a2a; /* toned orange */
+    --primary-cyan: #3b7b77; /* muted teal */
+    --primary-pink: #9b6270; /* muted rose */
+    
+    /* Secondary Colors */
+    --accent-yellow: #FFEB3B;
+    --accent-dark: #0D0D0D;
+    --accent-light: #FFFFFF;
+    
+    /* Gradients */
+    --gradient-warm: linear-gradient(135deg, #9A7A48 0%, #a86a2a 50%, #7F5149 100%);
+    --gradient-cool: linear-gradient(135deg, #3b7b77 0%, #5b435b 50%, #9b6270 100%);
+    --gradient-earth: linear-gradient(135deg, #436b43 0%, #5b435b 50%, #9A7A48 100%);
+    --gradient-neon: linear-gradient(90deg, rgba(59,123,119,0.15) 0%, rgba(67,107,67,0.15) 50%, rgba(154,122,72,0.12) 100%);
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 4rem;
+    
+    /* Typography */
+    --font-family-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-serif: 'Georgia', serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+    --font-size-4xl: 3.5rem;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.25);
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease-in-out;
+    --transition-normal: 0.3s ease-in-out;
+    --transition-slow: 0.5s ease-in-out;
+}
