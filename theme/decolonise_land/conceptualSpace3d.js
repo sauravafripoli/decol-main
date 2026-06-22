@@ -231,17 +231,55 @@ export function initConceptualSpace3D(UI, onSelect) {
         UI.publicationCard.style.display = 'none';
     });
 
-    UI.btnZoomIn?.addEventListener('click', () => {
-        const direction = new THREE.Vector3().subVectors(camera.position, controls.target);
-        direction.normalize().multiplyScalar(Math.max(2, direction.length() * 0.85));
-        camera.position.copy(controls.target).add(direction);
-    });
+    // UI.btnZoomIn?.addEventListener('click', () => {
+    //     const direction = new THREE.Vector3().subVectors(camera.position, controls.target);
+    //     direction.normalize().multiplyScalar(Math.max(2, direction.length() * 0.85));
+    //     camera.position.copy(controls.target).add(direction);
+    // });
 
-    UI.btnZoomOut?.addEventListener('click', () => {
-        const direction = new THREE.Vector3().subVectors(camera.position, controls.target);
-        direction.normalize().multiplyScalar(Math.min(100, direction.length() * 1.2));
-        camera.position.copy(controls.target).add(direction);
-    });
+    // UI.btnZoomOut?.addEventListener('click', () => {
+    //     const direction = new THREE.Vector3().subVectors(camera.position, controls.target);
+    //     direction.normalize().multiplyScalar(Math.min(100, direction.length() * 1.2));
+    //     camera.position.copy(controls.target).add(direction);
+    // });
+    // Smooth zoom function
+function zoomCamera(factor) {
+    if (!camera || !controls) return;
+
+    // Vector from target to camera
+    const direction = new THREE.Vector3()
+        .subVectors(camera.position, controls.target);
+
+    // Current distance from target
+    const distance = direction.length();
+
+    // Calculate new distance
+    const newDistance = THREE.MathUtils.clamp(
+        distance * factor,
+        5,    // minimum zoom distance
+        80    // maximum zoom distance
+    );
+
+    // Keep direction but change length
+    direction.setLength(newDistance);
+
+    // Move camera
+    camera.position.copy(controls.target).add(direction);
+
+    // Update OrbitControls
+    controls.update();
+}
+
+// Zoom In
+UI.btnZoomIn?.addEventListener('click', () => {
+    zoomCamera(0.9);
+});
+
+// Zoom Out
+UI.btnZoomOut?.addEventListener('click', () => {
+    zoomCamera(1.1);
+});
+
 
     const rotateBy = (angle) => {
         const x = camera.position.x - controls.target.x;
