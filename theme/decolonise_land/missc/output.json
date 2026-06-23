@@ -1,12 +1,4 @@
-// src/data.js
-export const CURRENT_YEAR = new Date().getFullYear();
-export const AXIS_MIN = -10;
-export const AXIS_MAX = 10;
-export const AXIS_RANGE = AXIS_MAX - AXIS_MIN;
-export const DEFAULT_AXIS_INFO = { citation: '', positioning: '' };
-
-// Initial data (make this mutable with `let`)
-export let diamondsData = [
+[
     {
         "author": "Khan",
         "shortTitle": "The Narrative of Decolonization of Development Aid",
@@ -833,28 +825,4 @@ export let diamondsData = [
             "Governments/Policy Statements"
         ]
     }
-];
-
-function normalizeDiamondsData() {
-    diamondsData.forEach(d => {
-        d.axisInfo ??= { x: { ...DEFAULT_AXIS_INFO }, y: { ...DEFAULT_AXIS_INFO }, z: { ...DEFAULT_AXIS_INFO } };
-        d.axisInfo.x ??= { ...DEFAULT_AXIS_INFO };
-        d.axisInfo.y ??= { ...DEFAULT_AXIS_INFO };
-        d.axisInfo.z ??= { ...DEFAULT_AXIS_INFO };
-        if (!Array.isArray(d.category)) {
-            d.category = d.category ? [String(d.category)] : [];
-        }
-        d.x = Number.isFinite(d.x) ? d.x : 0;
-        d.y = Number.isFinite(d.y) ? d.y : 0;
-        d.z = Number.isFinite(d.z) ? d.z : 0;
-        d.year = Number.isFinite(d.year) ? d.year : null;
-    });
-}
-
-normalizeDiamondsData(); // Normalize initial data on module load
-
-export function updateDiamondsData(newData) {
-    // This allows main.js to update the central diamondsData array
-    diamondsData = newData;
-    normalizeDiamondsData(); // Ensure structure of new data
-}
+]
