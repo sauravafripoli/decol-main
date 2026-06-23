@@ -20,6 +20,9 @@ let targetPlaneOpacity = 0.15;
 let currentPlaneOpacity = 0.15;
 let lastWidth = 0;
 let lastHeight = 0;
+let octantLabel = null;
+let octantCanvas = null;
+let octantContext = null;
 
 const quadrants = [
     { x: -1, y: -1, z: -1, name: 'Reformist Western Establishment', description: '(-Reform, -Collective, -Western)' , subDescription: 'Incremental reform of the status quo–the mainstream donor system.', tooltip:'Maps voices of those who seek to improve the established aid architecture — the major Western donors and multilateral institutions and their procedures — without changing who holds authority within it. Change is gradual and routed through existing channels; the aim is greater efficiency, coordination and accountability, not a redistribution of power.' },
@@ -113,20 +116,37 @@ function selectOctant(index, UI) {
     const items = UI.octantNav.querySelectorAll('.octant-item');
 
     if (selectedOctantIndex === index) {
-        selectedOctantIndex = null;
-        items.forEach((el) => el.classList.remove('selected'));
-        targetCameraPosition = new THREE.Vector3(20, 20, 20);
-        targetLookAt.set(0, 0, 0);
-        targetPlaneOpacity = 0.15;
-        return;
-    }
+    selectedOctantIndex = null;
+    items.forEach((el) => el.classList.remove('selected'));
+
+    octantLabel.visible = false;
+
+    targetCameraPosition = new THREE.Vector3(20, 20, 20);
+    targetLookAt.set(0, 0, 0);
+    targetPlaneOpacity = 0.15;
+    return;
+}
 
     selectedOctantIndex = index;
     items.forEach((el) => el.classList.remove('selected'));
     items[index]?.classList.add('selected');
 
     const q = quadrants[index];
-    targetCameraPosition = new THREE.Vector3(q.x * 15, q.y * 15, q.z * 15);
+
+    updateOctantLabel(q.name);
+
+    octantLabel.position.set(
+        q.x * 8,
+        q.y * 4,
+        q.z * 8
+    );
+
+    targetCameraPosition = new THREE.Vector3(
+        q.x * 15,
+        q.y * 15,
+        q.z * 15
+    );
+
     targetLookAt.set(0, 0, 0);
     targetPlaneOpacity = 0.98;
 }
@@ -223,6 +243,7 @@ export function initConceptualSpace3D(UI, onSelect) {
     scene.add(dirLight);
 
     createAxesAndPlanes();
+    createOctantLabel();
     setupOctantNav(UI);
 
     pointsGroup = new THREE.Group();
@@ -351,4 +372,53 @@ export function updateConceptualSpace3D({ diamondsData, filterYearMax, isPublica
 
 export function destroyConceptualSpace3D() {
     if (animationFrameId) cancelAnimationFrame(animationFrameId);
+}
+
+function createOctantLabel() {
+    octantCanvas = document.createElement('canvas');
+    octantCanvas.width = 512;
+    octantCanvas.height = 128;
+
+    octantContext = octantCanvas.getContext('2d');
+
+    const texture = new THREE.CanvasTexture(octantCanvas);
+
+    const material = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true
+    });
+
+    octantLabel = new THREE.Sprite(material);
+    octantLabel.scale.set(7, 0.7, 1);
+    octantLabel.position.set(0, 10, 0);
+    octantLabel.visible = false;
+
+    scene.add(octantLabel);
+}
+
+function updateOctantLabel(text) {
+    octantCanvas.width = 1200;
+    octantCanvas.height = 120;
+
+    octantContext.clearRect(0, 0, 1200, 120);
+
+    let fontSize = 42;
+
+    if (text.length > 20) fontSize = 36;
+    if (text.length > 30) fontSize = 32;
+    if (text.length > 40) fontSize = 28;
+
+    octantContext.fillStyle = "#000000";
+    octantContext.font = `600 ${fontSize}px "Open Sans", sans-serif`;
+    octantContext.textAlign = "center";
+    octantContext.textBaseline = "middle";
+
+    octantContext.fillText(
+        text,
+        600,
+        60
+    );
+
+    octantLabel.material.map.needsUpdate = true;
+    octantLabel.visible = true;
 }
