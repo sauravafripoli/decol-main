@@ -193,6 +193,59 @@ function initMiniVaa3D(UI, userPos, closest, opposite) {
     renderLoop();
 }
 
+
+const OCTANTS = [
+    {
+        x: -1, y: -1, z: -1,
+        name: 'Reformist Western Establishment',
+        description: 'Incremental reform of the status quo–the mainstream donor system.'
+    },
+    {
+        x: -1, y: -1, z: 1,
+        name: 'State-Led Southern Development',
+        description: 'Reform within existing frameworks, directed by Global South states.'
+    },
+    {
+        x: -1, y: 1, z: -1,
+        name: 'Technocratic Western-led Development',
+        description: 'Expert- and market-led problem-solving inside the existing system.'
+    },
+    {
+        x: -1, y: 1, z: 1,
+        name: 'Local Southern Champions',
+        description: 'Incremental change led by individual Global South actors.'
+    },
+    {
+        x: 1, y: -1, z: -1,
+        name: 'Global Solidarity',
+        description: 'Systemic change pushed for from the Global North in solidarity with the South.'
+    },
+    {
+        x: 1, y: -1, z: 1,
+        name: 'The Pluriverse',
+        description: 'Plural, community-based alternatives originating in the Global South.'
+    },
+    {
+        x: 1, y: 1, z: -1,
+        name: 'Critical Western Voices',
+        description: 'Western critics arguing the system is flawed at its foundations.'
+    },
+    {
+        x: 1, y: 1, z: 1,
+        name: 'Radical Vanguards',
+        description: 'A Global South few moving first toward a reordered global system.'
+    }
+];
+
+function getUserOctant(x, y, z) {
+    const sx = x >= 0 ? 1 : -1;
+    const sy = y >= 0 ? 1 : -1;
+    const sz = z >= 0 ? 1 : -1;
+
+    return OCTANTS.find((o) => o.x === sx && o.y === sy && o.z === sz);
+}
+
+
 function finish(UI) {
     showScreen(UI, 'result');
 
@@ -203,9 +256,16 @@ function finish(UI) {
 
     const closest = nearestPublications(state.dataSource, { x: finalX, y: finalY, z: finalZ });
     const opposite = nearestPublications(state.dataSource, { x: -finalX, y: -finalY, z: -finalZ });
+    const userOctant = getUserOctant(finalX, finalY, finalZ);
+
 
     UI.vaaResultText.innerHTML = `
         <p><b>Your position:</b> X ${finalX > 0 ? '+' : ''}${finalX}, Y ${finalY > 0 ? '+' : ''}${finalY}, Z ${finalZ > 0 ? '+' : ''}${finalZ}</p>
+        <div style="background:#edf2f7; border-left:4px solid #3182ce; padding:12px; margin:15px 0; border-radius:6px;">
+            <p style="margin:0; font-size:0.9em; color:#4a5568;"><b>Your octant</b></p>
+            <h3 style="margin:6px 0 4px 0;">${userOctant?.name || 'Unknown octant'}</h3>
+            <p style="margin:0; color:#2d3748;">${userOctant?.description || ''}</p>
+        </div>
         <p><b>Closest publications:</b></p>
         <ul class="vaa-list vaa-closest">${closest.map((a) => `<li><b>${a.author || 'Unknown'}</b> <span style="color: #4a5568;">(${a.shortTitle || 'Untitled'})</span></li>`).join('')}</ul>
         <p style="margin-top: 20px;"><b>Opposite-position publications:</b></p>
@@ -215,7 +275,7 @@ function finish(UI) {
         </div>
     `;
 
-    initMiniVaa3D(UI, { x: finalX, y: finalY, z: finalZ }, closest, opposite);
+    initMiniVaa3D(UI, { x: finalX, y: finalY, z: finalZ , }, closest, opposite);
 }
 
 function answer(UI, value) {
