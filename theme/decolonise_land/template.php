@@ -111,11 +111,23 @@
     <div class="header-container">
         <h1>Decolonising Development: Exploring Conceptual Spaces</h1>
         <p>
-            Civil society, academic and government views and activities around "decolonising development" span a broad range of positions - they open up a conceptual space. Exploring this space is a key part of engaging with the topic. This tool invites you to engage in an interactive exploration in three steps. First, you are invited to explore different viewpoints along three conceptual axes in the Axes View. Then, you can explore how these positions relate in the conceptual space view in the Your Position section. Lastly, you are invited to position yourself in the conceptual space you have just explored.
+            Civil society, academic and government views and activities around "decolonising development" span a broad range of positions – they open up a conceptual space. Exploring this space as part of discussions and controversies about the past, present and future of international cooperation  is a key part of engaging with the topic. This interactive tool invites you to navigate select texts in three steps. First, you are invited to explore different viewpoints along three conceptual axes in the Axes View. Then, you can explore how these positions relate to each other in the 3D Conceptual Space. Lastly, in the Your Position section you are invited to position yourself in the conceptual space you have just explored. These findings are based on analysis done by APRI staff. APRI does not take institutional positions on public policy issues.        
         </p>
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong>
+            This tool represents an analytical interpretation of selected texts and publications.
+            The placement of sources reflects the coding and analysis conducted by APRI staff
+            and should not be understood as endorsement, criticism, or an institutional policy position.
+        </div>
     </div>
 
     <h2 class="section-header" id="axes-section">1. Axes View</h2>
+    <div class="header-container">
+        <p>
+            The Axes view categorizes literature on development cooperation using three distinct axes identified through desk  and thematic clustering: <b>Reform-Transformation</b>, <b>Collective-Individual</b>, and <b>Western-Global South</b>. The <b>Reform-Transformation</b> axis differentiates between adapting current systems of development cooperation from within versus completely replacing them which is represented on the transformation side. The <b>Collective-Individual</b> axis balances shared responsibility and community engagement against initiatives that rely heavily on individuals to spearhead change. Finally, the <b>Western-Global South</b> axis distinguishes between perspectives that critique Western universalism/altruism and those that actively center Global South empowerment and indigenous knowledge. Placement along these axes serves strictly as an objective coding mechanism rather than a value judgment or normative stance on the literature. All sources are placed based on their level of conviction on a scale of -10 to 10. Sources that fall on 0 for any particular axis do not address the respective axis categorization.
+
+        </p>
+    </div>
     <div id="axes-visualization">
             <h2 style="font-size: 1em; font-weight: 500; color: #4a5568; margin: 0 0 20px 0;">Visualisation of Conceptual Axes across Publications</h2>
             <div class="axis-bar-container">
@@ -180,6 +192,11 @@
         </div>
 
         <h2 class="section-header" id="conceptual-section">2. Conceptual Space View</h2>
+        <div class="header-container">
+        <p>
+            The 3D conceptual space view is based on the axes, but puts them into a coordinate system that visualises how texts cluster together thematically. It organizes the sources into 8 distinct octants based on each source's placement on the three axes to align them with a position encapsulating how each source broadly understands and analyses colonial continuities within development cooperation. The 8 octants include: <b>Reformist Western Establishment</b>, <b>State-led Southern Development</b>, <b>Technocratic Western-led Development</b>, <b>Local Southern Champions</b>, <b>Global Solidarity</b>, <b>the Pluriverse</b>, <b>Critical Western Voices</b>, and <b>Radical Vanguards</b>. 
+        </p>
+        </div>
         <div id="canvas-container">
             <div id="tooltip"></div>
 
@@ -239,10 +256,18 @@
             </div>
         </div>
 
+        <h2 class="section-header" id="position-section">3. Your Position</h2>
+          <div class="header-container">
+            <p>
+                    In this section you are invited, after having interacted with the Axes and 3D Conceptual Space, to position yourself vis-à-vis some positions taken in the mapped texts. Based on your answers, your position is then mapped into the conceptual space you have just explored.  The placement is based on your responses to 9 questions. The questions are randomly selected with 3 of each representing a particular axis and source. Through responding to these questions a set of coordinates will be established to place you in an octant on the 3D Conceptual Space that best aligns with your responses. Once you receive a placement we invite you to reflect on this and how you see yourself fitting into the conceptual space in regard to where you align and converge with the sources listed. 
+            </p>
+       
+        </div>
+
+
         <div id="vaa-section" class="vaa-container">
             <div id="vaa-container">
             <div id="vaa-start-screen">
-                <h3 style="text-align: left; font-size: 1.4rem; color: #2d3748; margin-bottom: 5px;">3. Your Position</h3>
                 <h4 style="text-align: left; font-size: 1rem; color: #4a5568; margin-top: 0; font-weight: 400;">Find out where you stand and explore views close to and opposite your own.</h4>
                 <p>Answer a few questions to see where you stand in the conceptual space of decolonising development.</p>
                 <button id="btn-start-vaa">Start Assessment</button>
@@ -318,6 +343,13 @@ window.VrConfig = window.VrConfig || {};
 </script>
 
 <script type="module" src="<?php echo $decolonisePath; ?>/main.js?v=<?php echo get_site_version(); ?>&t=<?php echo @filemtime(__DIR__ . '/main.js'); ?>"></script>
+
+<div class="site-footer-notes">
+    <p><strong>
+        This tool was produced under the supervision and leadership of the Economy and Society Programme team: Joshua Kwesi Aikins, Amara Phillips and Kodzo Osei during his internship. We would like to extend our sincerest thanks to Saurav Adhikari and Stephen Oloh for iterating and coding work for the tool. We also would like to thank the designer, Marco Ugolini for his support in developing the mapping and Vincent Reich for coordinating the communication activities supporting this initiative. Above all, this work reflects the strong team spirit and dedication to quality outputs within APRI.
+
+    </strong></p>
+</div>
 
 <?php include('footer.inc.php'); ?>
 

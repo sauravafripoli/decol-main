@@ -22,14 +22,14 @@ let lastWidth = 0;
 let lastHeight = 0;
 
 const quadrants = [
-    { x: -1, y: -1, z: -1, name: 'Reformist Western Establishment', description: '(-Reform, -Collective, -Western)' },
-    { x: -1, y: -1, z: 1, name: 'State-Led Southern Development', description: '(-Reform, -Collective, +Global South)' },
-    { x: -1, y: 1, z: -1, name: 'Technocratic Western-led Development', description: '(-Reform, +Individual, -Western)' },
-    { x: -1, y: 1, z: 1, name: 'Local Southern Champions', description: '(-Reform, +Individual, +Global South)' },
-    { x: 1, y: -1, z: -1, name: 'Global Solidarity', description: '(+Transformative, -Collective, -Western)' },
-    { x: 1, y: -1, z: 1, name: 'The Pluriverse', description: '(+Transformative, -Collective, +Global South)' },
-    { x: 1, y: 1, z: -1, name: 'Critical Western Voices', description: '(+Transformative, +Individual, -Western)' },
-    { x: 1, y: 1, z: 1, name: 'Radical Vanguards', description: '(+Transformative, +Individual, +Global South)' }
+    { x: -1, y: -1, z: -1, name: 'Reformist Western Establishment', description: '(-Reform, -Collective, -Western)' , subDescription: 'Incremental reform of the status quo–the mainstream donor system.', tooltip:'Maps voices of those who seek to improve the established aid architecture — the major Western donors and multilateral institutions and their procedures — without changing who holds authority within it. Change is gradual and routed through existing channels; the aim is greater efficiency, coordination and accountability, not a redistribution of power.' },
+    { x: -1, y: -1, z: 1, name: 'State-Led Southern Development', description: '(-Reform, -Collective, +Global South)' , subDescription: 'Reform within existing frameworks, directed by Global South states.', tooltip:'Keeps the current development frameworks but shifts authority within them toward Global South governments and regional blocs, who set priorities and exercise greater ownership. Change is collective and state-led, and corrective rather than system-replacing.' },
+    { x: -1, y: 1, z: -1, name: 'Technocratic Western-led Development', description: '(-Reform, +Individual, -Western)' , subDescription: 'Expert- and market-led problem-solving inside the existing system.', tooltip:'Treats development as a technical and managerial task addressed through expertise, market mechanisms and evidence of "what works." It operates within the current system and keeps Western actors and methods in the lead, emphasising individual capacity, enterprise and measurable results over structural or collective change.' },
+    { x: -1, y: 1, z: 1, name: 'Local Southern Champions', description: '(-Reform, +Individual, +Global South)' , subDescription: 'Incremental change led by individual Global South actors.', tooltip:'Presents perspectives that look  to entrepreneurs, local leaders and innovators in the Global South to improve outcomes case by case. It works within the existing system rather than replacing it, locating agency in individual initiative rather than in collective or structural reform.' },
+    { x: 1, y: -1, z: -1, name: 'Global Solidarity', description: '(+Transformative, -Collective, -Western)' , subDescription: 'Systemic change pushed for from the Global North in solidarity with the South.', tooltip:'Calls for fundamental change to the global order but assigns the responsibility to act to the Global North — rich states and movements expected to dismantle unequal structures through international alliances. The change sought is transformative and collective, the levers for change and agency it addresses are Western-led.' },
+    { x: 1, y: -1, z: 1, name: 'The Pluriverse', description: '(+Transformative, -Collective, +Global South)' , subDescription: 'Plural, community-based alternatives originating in the Global South.', tooltip:'Rejects the existing development model in favour of multiple, community-rooted alternatives grounded in Global Southern societies and knowledge systems. Change is transformative and collective, generated from below rather than reformed from above — the octant most aligned with decolonial perspectives.' },
+    { x: 1, y: 1, z: -1, name: 'Critical Western Voices', description: '(+Transformative, +Individual, -Western)' , subDescription: 'Western critics arguing the system is flawed at its foundations.', tooltip:'Individual thinkers, mostly based in the West, who hold that development and aid are broken at the root and need rethinking rather than repair. The critique is radical but voiced from within the West, and tends to favour individual judgement and bottom-up answers over collective or state-led programmes.' },
+    { x: 1, y: 1, z: 1, name: 'Radical Vanguards', description: '(+Transformative, +Individual, +Global South)' , subDescription: 'A Global South few moving first toward a reordered global system.', tooltip:'Maps the position that  fundamental change is driven by forerunners — individual figures, leaders, or a small coalition of Global South states — who move ahead of the broader consensus to demand a wholesale reordering of the global order. The ambition is transformative and rooted in the South, carried by a deliberate few rather than by mass movements or institutions.' }
 ];
 
 function getCategoryColor(category) {
@@ -94,6 +94,12 @@ function setupOctantNav(UI) {
             <div class="octant-text">
                 <h4>${q.name}</h4>
                 <p>${q.description}</p>
+                 <small class="octant-subdescription">
+                    ${q.subDescription || ''}
+                </small>
+                <div class="octant-tooltip">
+                    ${q.tooltip}
+                </div>
             </div>
         `;
         item.addEventListener('click', () => selectOctant(index, UI));
