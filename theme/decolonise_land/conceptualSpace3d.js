@@ -408,16 +408,21 @@ function updateOctantLabel(text) {
     if (text.length > 30) fontSize = 32;
     if (text.length > 40) fontSize = 28;
 
-    octantContext.fillStyle = "#000000";
-    octantContext.font = `600 ${fontSize}px "Open Sans", sans-serif`;
+    // Make the text bigger
+    fontSize += 8;   // Increase by 8px (adjust as desired)
+
+    octantContext.font = `700 ${fontSize}px "Open Sans", sans-serif`;
     octantContext.textAlign = "center";
     octantContext.textBaseline = "middle";
 
-    octantContext.fillText(
-        text,
-        600,
-        60
-    );
+    // White outline
+    octantContext.lineWidth = 6;
+    octantContext.strokeStyle = "#ffffff";
+    octantContext.strokeText(text, 600, 60);
+
+    // Black fill
+    octantContext.fillStyle = "#000000";
+    octantContext.fillText(text, 600, 60);
 
     octantLabel.material.map.needsUpdate = true;
     octantLabel.visible = true;
