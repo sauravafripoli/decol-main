@@ -246,36 +246,147 @@ function getUserOctant(x, y, z) {
 }
 
 
+function renderOctantCard(title, octant, color = '#3182ce', bg = '#edf2f7') {
+    return `
+        <div style="
+            flex:1;
+            background:${bg};
+            border-left:4px solid ${color};
+            border-radius:8px;
+            padding:16px;
+            min-width:300px;
+            box-sizing:border-box;
+        ">
+            <p style="margin:0; font-size:0.9em; color:#4a5568;">
+                <b>${title}</b>
+            </p>
+
+            <h3 style="margin:8px 0 12px 0;">
+                ${octant?.name || 'Unknown'}
+            </h3>
+
+            <div style="
+                height:1px;
+                background:#cbd5e0;
+                margin:12px 0;
+            "></div>
+
+            <p style="
+                margin:0;
+                color:#2d3748;
+                line-height:1.6;
+            ">
+                ${octant?.description || ''}
+            </p>
+        </div>
+    `;
+}
+function renderPublicationList(title, publications, className) {
+    return `
+        <p style="margin-top:20px;"><b>${title}</b></p>
+        <ul class="vaa-list ${className}">
+            ${publications.map((a) => `
+                <li>
+                    <b>${a.author || 'Unknown'}</b>
+                    <span style="color:#4a5568;">(${a.shortTitle || 'Untitled'})</span>
+                </li>
+            `).join('')}
+        </ul>
+    `;
+}
+
 function finish(UI) {
     showScreen(UI, 'result');
 
     const factor = 10 / 4;
+
     const finalX = Math.max(-10, Math.min(10, Math.round((state.scores.x * factor) * 10) / 10));
     const finalY = Math.max(-10, Math.min(10, Math.round((state.scores.y * factor) * 10) / 10));
     const finalZ = Math.max(-10, Math.min(10, Math.round((state.scores.z * factor) * 10) / 10));
 
-    const closest = nearestPublications(state.dataSource, { x: finalX, y: finalY, z: finalZ });
-    const opposite = nearestPublications(state.dataSource, { x: -finalX, y: -finalY, z: -finalZ });
-    const userOctant = getUserOctant(finalX, finalY, finalZ);
+    const userPosition = {
+        x: finalX,
+        y: finalY,
+        z: finalZ
+    };
 
+    const oppositePosition = {
+        x: -finalX,
+        y: -finalY,
+        z: -finalZ
+    };
+
+    const closest = nearestPublications(state.dataSource, userPosition);
+    const opposite = nearestPublications(state.dataSource, oppositePosition);
+
+    const userOctant = getUserOctant(finalX, finalY, finalZ);
+    const oppositeOctant = getUserOctant(-finalX, -finalY, -finalZ);
 
     UI.vaaResultText.innerHTML = `
-        <p><b>Your position:</b> X ${finalX > 0 ? '+' : ''}${finalX}, Y ${finalY > 0 ? '+' : ''}${finalY}, Z ${finalZ > 0 ? '+' : ''}${finalZ}</p>
-        <div style="background:#edf2f7; border-left:4px solid #3182ce; padding:12px; margin:15px 0; border-radius:6px;">
-            <p style="margin:0; font-size:0.9em; color:#4a5568;"><b>Your octant</b></p>
-            <h3 style="margin:6px 0 4px 0;">${userOctant?.name || 'Unknown octant'}</h3>
-            <p style="margin:0; color:#2d3748;">${userOctant?.description || ''}</p>
+        <p>
+            <b>Your position:</b>
+            X ${finalX > 0 ? '+' : ''}${finalX},
+            Y ${finalY > 0 ? '+' : ''}${finalY},
+            Z ${finalZ > 0 ? '+' : ''}${finalZ}
+        </p>
+
+        <div style="
+            display:flex;
+            gap:20px;
+            margin:20px 0 30px;
+            align-items:stretch;
+            flex-wrap:wrap;
+        ">
+            ${renderOctantCard(
+                'Your perspective',
+                userOctant,
+                '#3182ce',
+                '#edf2f7'
+            )}
+
+            ${renderOctantCard(
+                'Contrasting perspective',
+                oppositeOctant,
+                '#c53030',
+                '#fff5f5'
+            )}
         </div>
-        <p><b>Closest publications:</b></p>
-        <ul class="vaa-list vaa-closest">${closest.map((a) => `<li><b>${a.author || 'Unknown'}</b> <span style="color: #4a5568;">(${a.shortTitle || 'Untitled'})</span></li>`).join('')}</ul>
-        <p style="margin-top: 20px;"><b>Opposite-position publications:</b></p>
-        <ul class="vaa-list vaa-opposite">${opposite.map((a) => `<li><b>${a.author || 'Unknown'}</b> <span style="color: #4a5568;">(${a.shortTitle || 'Untitled'})</span></li>`).join('')}</ul>
-        <div style="background-color:#fffbea; border-left: 4px solid #ecc94b; padding: 10px; margin-top:25px; font-size: 0.9em; color: #744210;">
-            <b>Invitation:</b> Explore adjacent and opposite positions in this space to challenge or refine your view.
+
+        ${renderPublicationList(
+            'Closest publications',
+            closest,
+            'vaa-closest'
+        )}
+
+        ${renderPublicationList(
+            'Contrasting publications',
+            opposite,
+            'vaa-opposite'
+        )}
+
+        <div style="
+            background:#fffbea;
+            border-left:4px solid #ecc94b;
+            padding:12px;
+            margin-top:25px;
+            color:#744210;
+            line-height:1.5;
+            border-radius:4px;
+        ">
+            <b>Reflection:</b>
+            Your responses place you closest to the
+            <b>${userOctant?.name}</b> perspective.
+            Consider exploring both the publications that align with your responses and those representing the
+            <b>${oppositeOctant?.name}</b> perspective to understand how different assumptions shape approaches to development.
         </div>
     `;
 
-    initMiniVaa3D(UI, { x: finalX, y: finalY, z: finalZ , }, closest, opposite);
+    initMiniVaa3D(
+        UI,
+        userPosition,
+        closest,
+        opposite
+    );
 }
 
 function answer(UI, value) {
