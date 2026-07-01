@@ -28,7 +28,7 @@
 
 <div id="main-content">
     <div class="header-container">
-        <h1>Decolonising Development: Exploring Conceptual Space</h1>
+        <h1>Decolonising Development: Exploring Conceptual Space of Debates on the Past, Present and Futures of Development Cooperation</h1>
         <p>
             Civil society, academic and government views and activities around "decolonising development" span a broad range of positions – they open up a conceptual space. Exploring this space as part of discussions and controversies about the past, present and future of international development cooperation is a key part of engaging with the topic. This interactive tool invites you to navigate select texts in three steps. First, you are invited to explore different viewpoints along three conceptual axes in the <b>Axes View</b>. Then, you can explore how these positions relate to each other in the <b>3D Conceptual Space</b>. Lastly, in the <b>Your Position</b> section, you are invited to position yourself in the conceptual space you have just explored. Importantly, the tool features several sources by the same institutions/authors to demonstrate their varying perspectives depending on the context of the work. These findings are based on analysis conducted by the Africa Policy Research Institute’s (APRI) staff. 
         </p>
