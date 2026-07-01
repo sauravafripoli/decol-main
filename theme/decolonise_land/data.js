@@ -389,7 +389,7 @@ export let diamondsData = [
         "year": 2024,
         "x": -4,
         "y": 2,
-        "z": 1,
+        "z": 3,
         "axisInfo": {
             "x": {
                 "citation": "Social justice and the safeguarding of the environment cannot be achieved unless local people are involved. This necessitates recourse to the social sciences, to solutions based on nature and culture, and to participative initiatives which take into account the voices of people who are otherwise marginalised. As a result, the entire narrative is transformed: we move from `localisation` to `contextualisation`; we prefer `fellow actors`` to `beneficiaries`; and we evolve from `partnership` towards `alliance`; and we aim to turn `decolonisation` into `shared struggles for emancipation`.” (Saillard, p. 36)",
