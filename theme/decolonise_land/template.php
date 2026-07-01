@@ -1,87 +1,6 @@
 <?php if(!defined('IN_GS')){ die('you cannot load this page directly.'); } ?>
 <?php include('header.inc.php'); ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php get_page_clean_title(); ?> - <?php get_site_name(); ?></title>
-        <?php
-            $sitePath = rtrim(dirname($_SERVER['SCRIPT_NAME'] ?? ''), '/\\');
-            if ($sitePath === '/') {
-                $sitePath = '';
-            }
-            $decolonisePath = $sitePath . '/theme/decolonise_land';
-        ?>
-
-    <meta name="robots" content="index, follow">
-    <link rel="shortcut icon" type="image/png" href="https://afripoli.org/uploads/logo/logo_60a657d21d6f4.png" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
-    <link href="https://afripoli.org/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-
-    <link href="https://afripoli.org/assets/themes/magazine/css/plugins-2.4.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<?php echo $decolonisePath; ?>/assets/css/style-lite.css?v=<?php echo get_site_version(); ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $decolonisePath; ?>/assets/css/custom.css" />
-
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-        }
-    }
-    </script>
-
-    <style>:root {--vr-font-primary:  "Open Sans", Helvetica, sans-serif;--vr-font-secondary:  "UncutSans Semibold","UncutSans Regular",Arial,sans-serif;--vr-font-tertiary:  "Open Sans", Helvetica, sans-serif;--vr-theme-color: #f8ae1a;--vr-block-color: #161616;--vr-mega-menu-color: #f9f9f9;}</style>
-    <style>
-        .mobile-menu-overlay,
-        .page-oppen-off-sidebar {
-            cursor: pointer !important;
-        }
-        .home-button {
-            position: fixed;
-            top: 18px;
-            right: 18px;
-            z-index: 1000;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 16px;
-            border-radius: 999px;
-            background: rgba(17, 24, 39, 0.78);
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-        }
-        .home-button:hover,
-        .home-button:focus {
-            transform: translateY(-1px);
-            background: rgba(17, 24, 39, 0.92);
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
-            outline: none;
-        }
-        @media (max-width: 768px) {
-            .home-button {
-                top: 12px;
-                right: 12px;
-                padding: 8px 12px;
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-</head>
-<?php /* header content replaced; continue body */ ?>
-
 <!-- TOC Sidebar -->
 <div id="toc-sidebar" class="toc-sidebar">
     <div class="toc-header">
@@ -330,18 +249,6 @@
 
 <div id="message-box"></div>
 
-<script src="https://afripoli.org/assets/themes/magazine/js/jquery-3.6.1.min.js"></script>
-<script src="https://afripoli.org/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?php echo $decolonisePath; ?>/assets/js/plugins-2.4.js"></script>
-<script src="<?php echo $decolonisePath; ?>/assets/js/script-2.4.min.js"></script>
-<script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
-
-<script>
-window.VrConfig = window.VrConfig || {};
-</script>
-
-<script type="module" src="<?php echo $decolonisePath; ?>/main.js?v=<?php echo get_site_version(); ?>&t=<?php echo @filemtime(__DIR__ . '/main.js'); ?>"></script>
-
 <div class="site-footer-notes">
     <p><strong>
         This tool was produced under the supervision and leadership of the Economy and Society Programme team: Joshua Kwesi Aikins and Amara Phillips as well as Kodzo Osei during his internship. We would like to extend our sincerest thanks to Saurav Adhikari and Stephen Oloh for iterating and coding work for the tool. We also would like to thank Marco Ugolini, the designer, for his support in developing the mapping, and Vincent Reich for coordinating the communication activities supporting this initiative. Above all, this work reflects the strong team spirit and dedication to quality outputs within APRI.
@@ -350,6 +257,3 @@ window.VrConfig = window.VrConfig || {};
 </div>
 
 <?php include('footer.inc.php'); ?>
-
-</body>
-</html>

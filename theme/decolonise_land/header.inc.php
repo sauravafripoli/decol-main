@@ -1,7 +1,7 @@
 <?php if (!defined('IN_GS')) { die('you cannot load this page directly.'); }
 /****************************************************
 *
-* @File: 	footer.inc.php
+* @File: 	header.inc.php
 * @Package:	APRI Theme
 * @Action:	APRI header theme for microsites and minipages
 *
@@ -41,6 +41,19 @@
 		<link href="https://afripoli.org/assets/themes/magazine/css/plugins-2.4.min.css" rel="stylesheet">
 		<!-- APRI core style (lite version) -->
 		<link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/assets/css/style-lite.css?v=<?php echo get_site_version(); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/assets/css/custom.css">
+
+		<script src="https://d3js.org/d3.v6.min.js"></script>
+
+		<script type="importmap">
+		{
+		    "imports": {
+		        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+		        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+		    }
+		}
+		</script>
+
 		
 	</head>
 	<?php get_header(); ?>
