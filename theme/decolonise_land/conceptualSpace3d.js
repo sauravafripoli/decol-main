@@ -164,16 +164,17 @@ function selectOctant(index, UI) {
     const items = UI.octantNav.querySelectorAll('.octant-item');
 
     if (selectedOctantIndex === index) {
-    selectedOctantIndex = null;
-    items.forEach((el) => el.classList.remove('selected'));
+        selectedOctantIndex = null;
+        items.forEach((el) => el.classList.remove('selected'));
 
-    octantLabel.visible = false;
+        octantLabel.visible = false;
 
-    targetCameraPosition = new THREE.Vector3(20, 20, 20);
-    targetLookAt.set(0, 0, 0);
-    targetPlaneOpacity = 0.15;
-    return;
-}
+        targetCameraPosition = new THREE.Vector3(20, 20, 20);
+        targetLookAt.set(0, 0, 0);
+        currentLookAt.set(0, 0, 0);
+        targetPlaneOpacity = 0.15;
+        return;
+    }
 
     selectedOctantIndex = index;
     items.forEach((el) => el.classList.remove('selected'));
@@ -196,6 +197,7 @@ function selectOctant(index, UI) {
     );
 
     targetLookAt.set(0, 0, 0);
+    currentLookAt.set(0, 0, 0);
     targetPlaneOpacity = 0.98;
 }
 
@@ -347,11 +349,17 @@ function zoomCamera(factor) {
 
 // Zoom In
 UI.btnZoomIn?.addEventListener('click', () => {
+    // Clear animation targets so zoom takes effect immediately
+    targetCameraPosition = null;
+    targetLookAt.set(0, 0, 0);
     zoomCamera(0.9);
 });
 
 // Zoom Out
 UI.btnZoomOut?.addEventListener('click', () => {
+    // Clear animation targets so zoom takes effect immediately
+    targetCameraPosition = null;
+    targetLookAt.set(0, 0, 0);
     zoomCamera(1.1);
 });
 
